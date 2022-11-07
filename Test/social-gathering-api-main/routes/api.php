@@ -34,6 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
         ->name('me.profile');
     Route::put('location' , [LocationController::class, 'update'])
         ->name('location.update');
+    Route::put('location/visibility' , [LocationController::class, 'setLocationVisibility'])
+        ->name('location.visibility');
 
     Route::group(['prefix' => 'social'], function () {
         Route::post('follow/{user}', [FollowingController::class, 'store'])
