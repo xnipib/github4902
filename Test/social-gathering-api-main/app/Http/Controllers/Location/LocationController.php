@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Location;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 
 class LocationController extends Controller
@@ -20,6 +21,7 @@ class LocationController extends Controller
         $user->save();
         return new UserResource($user);
     }
+    
     public function setLocationVisibility(): UserResource
     {
         $validated = request()->validate([
