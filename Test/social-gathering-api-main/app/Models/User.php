@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use DB;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -86,5 +87,21 @@ class User extends Authenticatable
         );
     }
 
+    public function scopeSelectDistanceTo($query, float $lat, float $lng)
+    {
+        $query->addSelect(
+            DB::raw(
+                "(IF (users.location_visible = 1 ,ST_Distance_Sphere(`location`, POINT($lng, $lat)) , NULL) ) as distance"
+            )
+        );
+    }
 
+    public function scopeOrderByDistance($query, float $lat, float $lng)
+    {
+        $query->orderBy(
+            DB::raw(
+                "ST_Distance_Sphere(`location`, POINT({$lat}, {$lng}))"
+            )
+        );
+    }
 }
