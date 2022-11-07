@@ -20,4 +20,15 @@ class LocationController extends Controller
         $user->save();
         return new UserResource($user);
     }
+    public function setLocationVisibility(): UserResource
+    {
+        $validated = request()->validate([
+            'location_visible' => 'required|boolean',
+        ]);
+        /* @var User $user */
+        $user = auth()->user();
+        $user->location_visible = $validated['location_visible'];
+        $user->save();
+        return new UserResource($user);
+    }
 }
