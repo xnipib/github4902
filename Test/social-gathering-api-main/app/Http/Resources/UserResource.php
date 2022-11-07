@@ -18,8 +18,10 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'location_visible' => $this->location_visible,
             'location' => $this->location,
             'followed' => (bool) $this->followed,
+            'distance' => $this->distance === null ? null : round($this->distance, 2),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
