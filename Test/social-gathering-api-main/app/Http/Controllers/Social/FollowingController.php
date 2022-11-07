@@ -21,14 +21,31 @@ class FollowingController extends Controller
     public function followings()
     {
         ray()->queries();
-        return UserResource::collection(auth()->user()->followings);
+        /* @var User $user */
+        $user = auth()->user();
+        $lat = $user->location->getLat();
+        $lng = $user->location->getLng();
+        $followings = auth()->user()
+            ->followings()
+            ->select('users.*')
+            ->when($user->location,
+                fn($q) => $q->selectDistanceTo($lat, $lng)
+                    ->orderByDistance($lat, $lng)
+            )
+            ->get();
+        return UserResource::collection($followings);
     }
 
     public function search()
     {
         request()->validate([
-            'email' => 'required|email',
+            'email' => 'required',
         ]);
+        /* @var User $user */
+        $user = auth()->user();
+        $lat = $user->location->getLat();
+        $lng = $user->location->getLng();
+
         $userId = auth()->user()->id;
         $email = request()->input('email');
         $users = User::query()
@@ -36,6 +53,10 @@ class FollowingController extends Controller
             ->addSelect(\DB::raw("(case when (SELECT COUNT(*) from follows where follows.following_user_id = {$userId}  and follows.user_id = users.id) then 1 else 0 end )as followed"))
             ->where('id', '!=', auth()->id())
             ->where('email', 'like', "%$email%")
+            ->when($user->location,
+                fn($q) => $q->selectDistanceTo($lat, $lng)
+                    ->orderByDistance($lat, $lng)
+            )
             ->get();
         return UserResource::collection($users);
     }
