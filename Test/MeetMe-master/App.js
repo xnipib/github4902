@@ -22,7 +22,6 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: Infinity,
-      retry: false,
     },
   },
 });
@@ -66,7 +65,7 @@ const Router = () => {
         },
       }}
     >
-      <StatusBar backgroundColor="blue" barStyle="light-content" />
+      <StatusBar backgroundColor="blue" barStyle="dark-content" />
       {authData?.token ? (
         <>
           <Tab.Navigator
