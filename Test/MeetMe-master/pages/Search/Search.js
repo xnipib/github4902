@@ -73,7 +73,7 @@ const SearchScreen = () => {
   //   };
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-white">
       <View className="bg-white">
         <SearchBar
           round
@@ -86,9 +86,13 @@ const SearchScreen = () => {
           containerStyle={{
             backgroundColor: "white",
             borderBottomColor: "transparent",
+            borderTopColor: "transparent",
             padding: 16,
           }}
-          inputContainerStyle={{ backgroundColor: "white" }}
+          inputContainerStyle={{
+            backgroundColor: "#f4f5fc",
+            paddingHorizontal: 8,
+          }}
         />
 
         {(data || [])?.length > 0 ? (
