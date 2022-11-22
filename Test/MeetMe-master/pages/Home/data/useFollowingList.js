@@ -9,7 +9,6 @@ export function useFollowingList() {
     },
     {
       staleTime: Infinity,
-      retry: false,
     }
   );
 }
