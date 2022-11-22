@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   const signOut = async () => {
     //Remove data from context, so the App can be notified
+
     //and send the user to the AuthStack
     await SecureStore.deleteItemAsync("token");
     setAuthData(undefined);
