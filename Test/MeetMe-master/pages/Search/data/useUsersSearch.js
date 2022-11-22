@@ -20,7 +20,6 @@ export function useSearchUsers(keyword) {
     },
     {
       staleTime: Infinity,
-      retry: false,
       initialData: [],
     }
   );
