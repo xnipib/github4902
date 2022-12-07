@@ -100,7 +100,7 @@ class User extends Authenticatable
     {
         $query->orderBy(
             DB::raw(
-                "ST_Distance_Sphere(`location`, POINT({$lat}, {$lng}))"
+                "ST_Distance_Sphere(`location`, POINT({$lng}, {$lat}))"
             )
         );
     }
