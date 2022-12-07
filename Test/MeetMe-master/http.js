@@ -2,7 +2,7 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
 const http = axios.create({
-  baseURL: "https://d960-156-216-39-32.eu.ngrok.io/api",
+  baseURL: "https://d833-156-216-46-228.eu.ngrok.io/api",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
