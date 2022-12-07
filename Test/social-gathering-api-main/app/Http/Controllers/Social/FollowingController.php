@@ -23,8 +23,8 @@ class FollowingController extends Controller
         ray()->queries();
         /* @var User $user */
         $user = auth()->user();
-        $lat = $user->location->getLat();
-        $lng = $user->location->getLng();
+        $lat = $user->location?->getLat();
+        $lng = $user->location?->getLng();
         $followings = auth()->user()
             ->followings()
             ->select('users.*')
