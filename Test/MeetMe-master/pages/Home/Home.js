@@ -7,6 +7,7 @@ import {
   FlatList,
   Pressable,
   Alert,
+  RefreshControl,
 } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import Toast from "react-native-root-toast";
@@ -80,17 +81,28 @@ export function HomeScreen({ navigation }) {
               ...item,
               key: item.id,
             }))}
+            refreshControl={
+              <RefreshControl
+                isRefreshing={isLoading}
+                onRefresh={refetchList}
+                colors={["#000"]} // for android
+                tintColor={"#000"} // for ios
+              />
+            }
             renderItem={({ item }) => (
               <View className="shadow-xs bg-white mb-4 px-4 py-3 rounded-lg flex flex-row items-center justify-between">
                 <View className="flex flex-row items-center">
                   <View className="bg-black h-10 w-10 rounded-lg mr-3 flex items-center justify-center">
                     <Text className="text-white text-lg font-bold">
-                      {item?.name?.slice(0, 1).toUpperCase()}
+                      {item?.name?.slice(0, 1)?.toUpperCase()}
                     </Text>
                   </View>
                   <View>
                     <Text className=" font-bold ">{item.name}</Text>
-                    <Text className="text-gray-400 ">{item.email}</Text>
+                    <Text className="text-gray-400 mb-1">{item.email}</Text>
+                    <Text className="text-gray-700 ">
+                      Distance: {!!item.distance ? item.distance + "km" : "NA"}
+                    </Text>
                   </View>
                 </View>
                 <View className="flex items-center justify-center">
