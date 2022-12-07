@@ -113,8 +113,11 @@ const SearchScreen = () => {
                     <Text className=" font-bold ">
                       {item.name?.slice(0, 10)}
                     </Text>
-                    <Text className="text-gray-400 font-sm">
+                    <Text className="text-gray-400 mb-1">
                       {item.email?.slice(0, 40)}
+                    </Text>
+                    <Text className="text-gray-700 ">
+                      Distance: {!!item.distance ? item.distance + "km" : "NA"}
                     </Text>
                   </View>
                 </View>
