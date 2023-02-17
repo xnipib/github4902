@@ -49,7 +49,7 @@ export function LoginScreen({ navigation }) {
   const submitBtnContent = isLoading ? (
     <ActivityIndicator />
   ) : (
-    <Text className="text-black text-center font-bold">Login</Text>
+    <Text className="text-white text-center font-bold">Login</Text>
   );
 
   const onSubmitClick = () => {
@@ -57,16 +57,16 @@ export function LoginScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className>
       <View className="pt-8 px-3 mt-5">
-        <Text className="text-white text-2xl font-bold mb-2">
+        <Text className="text-black text-2xl font-bold mb-2">
           Let's sign you in
         </Text>
-        <Text className="text-white text-xl leading-7">
+        <Text className="text-black text-xl leading-7">
           Welcome back.{"\n"}You've been missed!
         </Text>
 
-        <Text className="text-white text-sm leading-7 mt-8 font-medium">
+        <Text className="text-black text-sm leading-7 mt-8 font-medium">
           Email
         </Text>
         <Input
@@ -79,7 +79,7 @@ export function LoginScreen({ navigation }) {
           placeholder="Email"
         />
 
-        <Text className="text-white text-sm leading-7 mt-2 font-medium">
+        <Text className="text-black text-sm leading-7 mt-2 font-medium">
           Password
         </Text>
         <Input
@@ -89,10 +89,11 @@ export function LoginScreen({ navigation }) {
             marginTop: 2,
           }}
           secureTextEntry={true}
+          placeholder="Password"
         />
 
         <Pressable
-          className="bg-white mt-5 rounded-lg p-3"
+          className="bg-black mt-5 rounded-lg p-3 text-white"
           onPress={onSubmitClick}
           disabled={isLoading}
         >
@@ -100,11 +101,11 @@ export function LoginScreen({ navigation }) {
         </Pressable>
 
         <View className="flex items-center justify-center mt-8">
-          <Text className="text-white text-sm font-medium  text-center">
+          <Text className="text-black text-sm font-medium  text-center">
             Don't have an account?{" "}
           </Text>
           <Pressable onPress={() => navigation.navigate("Register")}>
-            <Text className="text-white text-sm font-medium underline">
+            <Text className="text-black text-sm font-medium underline">
               Register
             </Text>
           </Pressable>
