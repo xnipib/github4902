@@ -19,7 +19,7 @@ const SearchScreen = () => {
 
   const { mutate: doFollow } = useFollow({
     onSuccess: () => {
-      Toast.show("followed Successfully", {
+      Toast.show("Followed Successfully", {
         duration: 3000,
         backgroundColor: "white",
         textColor: "black",
