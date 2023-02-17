@@ -7,8 +7,8 @@ export function Input(props) {
     <TextInput
       {...props}
       style={{
-        color: "#fff",
-        borderColor: "#fff",
+        color: "#000",
+        borderColor: "#000",
         borderWidth: 1,
         borderRadius: 4,
         padding: 8,
