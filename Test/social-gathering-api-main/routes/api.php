@@ -32,6 +32,8 @@ Route::post('/logout', [AuthenticationController::class, 'destroy'])
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [MeController::class, 'profile'])
         ->name('me.profile');
+    Route::post('/me', [MeController::class, 'update'])
+        ->name('me.profile');
     Route::put('location' , [LocationController::class, 'update'])
         ->name('location.update');
     Route::put('location/visibility' , [LocationController::class, 'setLocationVisibility'])
