@@ -23,11 +23,11 @@ export function RegisterScreen({ navigation }) {
       navigation.navigate("Login");
       Toast.show("Registered Successfully", {
         duration: 3000,
-        backgroundColor: "white",
-        textColor: "black",
+        backgroundColor: "black",
+        textColor: "white",
         textStyle: {
           fontSize: 12,
-          color: "black",
+          color: "white",
         },
       });
     },
@@ -46,7 +46,7 @@ export function RegisterScreen({ navigation }) {
   const submitBtnContent = isLoading ? (
     <ActivityIndicator />
   ) : (
-    <Text className="text-black text-center font-bold">Register</Text>
+    <Text className="text-white text-center font-bold">Register</Text>
   );
 
   const onSubmitClick = () => {
@@ -56,12 +56,12 @@ export function RegisterScreen({ navigation }) {
   return (
     <SafeAreaView>
       <View className="pt-8 px-3 mt-5">
-        <Text className="text-white text-2xl font-bold mb-2">
-          Welcome to{"\n"}Social Gatherings
+        <Text className="text-black text-2xl font-bold mb-2">
+          Welcome to{"\n"}Meet Up
         </Text>
-        <Text className="text-white text-xl leading-7">Create an account</Text>
+        <Text className="text-black text-xl leading-7">Create an account</Text>
 
-        <Text className="text-white text-sm leading-7 mt-8 font-medium">
+        <Text className="text-black text-sm leading-7 mt-8 font-medium">
           Name
         </Text>
         <Input
@@ -70,9 +70,10 @@ export function RegisterScreen({ navigation }) {
           style={{
             marginTop: 2,
           }}
+          placeholder="Name"
         />
 
-        <Text className="text-white text-sm leading-7 mt-2 font-medium">
+        <Text className="text-black text-sm leading-7 mt-2 font-medium">
           Email
         </Text>
         <Input
@@ -85,7 +86,7 @@ export function RegisterScreen({ navigation }) {
           placeholder="Email"
         />
 
-        <Text className="text-white text-sm leading-7 mt-2 font-medium">
+        <Text className="text-black text-sm leading-7 mt-2 font-medium">
           Password
         </Text>
         <Input
@@ -95,9 +96,10 @@ export function RegisterScreen({ navigation }) {
             marginTop: 2,
           }}
           secureTextEntry={true}
+          placeholder="Password"
         />
 
-        <Text className="text-white text-sm leading-7 mt-2 font-medium">
+        <Text className="text-black text-sm leading-7 mt-2 font-medium">
           Confirm Password
         </Text>
         <Input
@@ -107,10 +109,11 @@ export function RegisterScreen({ navigation }) {
             marginTop: 2,
           }}
           secureTextEntry={true}
+          placeholder="Confirm Password"
         />
 
         <Pressable
-          className="bg-white mt-5 rounded-lg p-3"
+          className="bg-black mt-5 rounded-lg p-3"
           onPress={onSubmitClick}
           disabled={isLoading}
         >
@@ -118,11 +121,11 @@ export function RegisterScreen({ navigation }) {
         </Pressable>
 
         <View className="flex items-center justify-center mt-8">
-          <Text className="text-white text-sm font-medium  text-center">
+          <Text className="text-black text-sm font-medium  text-center">
             Already have an account?{" "}
           </Text>
           <Pressable onPress={() => navigation.navigate("Login")}>
-            <Text className="text-white text-sm font-medium underline">
+            <Text className="text-black text-sm font-medium underline">
               Login
             </Text>
           </Pressable>
