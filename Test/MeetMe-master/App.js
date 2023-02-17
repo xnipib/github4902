@@ -60,8 +60,8 @@ const Router = () => {
     <NavigationContainer
       theme={{
         colors: {
-          background: "black",
-          primary: "black",
+          background: "white",
+          primary: "white",
         },
       }}
     >
