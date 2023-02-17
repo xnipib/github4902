@@ -20,6 +20,24 @@ export function useProfile() {
   );
 }
 
+export function useUpdateProfile(opt) {
+  return useMutation(
+    (user) => {
+      return http.post(`/me`, user, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    },
+    {
+      ...opt,
+      onSuccess: (data) => {
+        opt?.onSuccess?.(data);
+      },
+    }
+  );
+}
+
 export function useToggleVisibility(opt) {
   return useMutation(
     (location_visible) => {
