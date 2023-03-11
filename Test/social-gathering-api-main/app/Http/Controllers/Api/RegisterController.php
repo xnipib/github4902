@@ -15,10 +15,12 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __invoke(RegisterRequest $request)
-    {
+    { 
+        $credentials = $request->credentials();
+        unset($credentials['password_confirmation']);
         return response()->json([
             'status' => true,
-            'user' => $user = User::create($request->credentials()),
+            'user' => $user = User::create($credentials),
             'token' => $user->createToken('access token')->plainTextToken
         ], 201);
     }
