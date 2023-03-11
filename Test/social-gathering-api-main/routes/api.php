@@ -45,7 +45,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('follow/{user}', [FollowingController::class, 'destroy'])
             ->name('social.following.destroy');
         Route::get('followings', [FollowingController::class, 'followings']);
-    Route::get('search', [FollowingController::class, 'search'])
-        ->name('search');
+        Route::get('search', [FollowingController::class, 'search'])
+            ->name('search');
     });
+
+    Route::get('nearby', [LocationController::class, 'nearby'])
+        ->name('nearby');
+
+    Route::post('mark-visited', [LocationController::class, 'markLocationVisited']);
+    Route::get('visited-locations', [LocationController::class, 'visitedLocations']);
 });
