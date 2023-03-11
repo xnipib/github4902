@@ -16,7 +16,8 @@ export function HomeScreen({ navigation }) {
     return <LoadingScreen />;
   }
 
-  const currentView = view === "list" ? <ListView /> : <UsersMap />;
+  const currentView =
+    view === "list" ? <ListView navigation={navigation} /> : <UsersMap />;
 
   const viewIcons = (icon) => (
     <View
