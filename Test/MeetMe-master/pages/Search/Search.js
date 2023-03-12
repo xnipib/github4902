@@ -10,6 +10,7 @@ import { useSearchUsers } from "./data/useUsersSearch";
 import { useFollow } from "../Home/data/useFollowingList";
 import Toast from "react-native-root-toast";
 import { useQueryClient } from "@tanstack/react-query";
+import { openToastr } from "../../utils/Toast";
 
 const SearchScreen = () => {
   const [search, setSearch] = useState("");
@@ -19,27 +20,15 @@ const SearchScreen = () => {
 
   const { mutate: doFollow } = useFollow({
     onSuccess: () => {
-      Toast.show("Followed Successfully", {
-        duration: 3000,
-        backgroundColor: "white",
-        textColor: "black",
-        textStyle: {
-          fontSize: 12,
-          color: "black",
-        },
-      });
+      openToastr({ message: "Followed Successfully" });
       refetchUsers(search);
 
       queryClient.invalidateQueries(["following"]);
     },
     onError: (error) => {
-      Toast.show(error?.response?.data?.message ?? "Server error", {
-        duration: 3000,
-        backgroundColor: "#aa2b30",
-        textColor: "white",
-        textStyle: {
-          fontSize: 12,
-        },
+      openToastr({
+        message: error?.response?.data?.message ?? "Server error",
+        isError: true,
       });
     },
   });
