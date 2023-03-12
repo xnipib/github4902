@@ -13,6 +13,7 @@ import { useLogin } from "./data/useLogin";
 
 import { Input } from "../../components";
 import { useAuth } from "../../Auth/auth";
+import { openToastr } from "../../utils/Toast";
 
 export function LoginScreen({ navigation }) {
   const [email, setEmail] = React.useState("");
@@ -22,26 +23,14 @@ export function LoginScreen({ navigation }) {
 
   const { isLoading, mutate: doLogin } = useLogin({
     onSuccess: (token) => {
-      Toast.show("Login Successfully", {
-        duration: 3000,
-        backgroundColor: "white",
-        textColor: "black",
-        textStyle: {
-          fontSize: 12,
-          color: "black",
-        },
-      });
+      openToastr({ message: "Login Successfully" });
 
       auth.signIn({ token });
     },
     onError: (error) => {
-      Toast.show(error?.response?.data?.message ?? "Server error", {
-        duration: 3000,
-        backgroundColor: "#aa2b30",
-        textColor: "white",
-        textStyle: {
-          fontSize: 12,
-        },
+      openToastr({
+        message: error?.response?.data?.message ?? "Server error",
+        isError: true,
       });
     },
   });
