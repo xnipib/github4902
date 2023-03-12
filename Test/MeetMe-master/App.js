@@ -2,6 +2,8 @@ import * as React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import { RootSiblingParent } from "react-native-root-siblings";
 
 import { HomeScreen } from "./pages/Home/Home";
@@ -14,10 +16,26 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { ProfileScreen } from "./pages/Profile/Profile";
+import { MeetMapScreen } from "./pages/MeetMap/MeetMap";
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createNativeStackNavigator();
+
+const HomeStack = createStackNavigator();
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="MeetMap" component={MeetMapScreen} />
+    </HomeStack.Navigator>
+  );
+}
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -87,11 +105,7 @@ const Router = () => {
               },
             })}
           >
-            <Tab.Screen
-              name="Home"
-              component={HomeScreen}
-              // options={{ tabBarBadge: 3 }} //for notification
-            />
+            <Tab.Screen name="Home" component={HomeStackScreen} />
             <Tab.Screen name="Search" component={SearchScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
           </Tab.Navigator>
