@@ -13,6 +13,7 @@ import { Text } from "react-native-elements";
 import Toast from "react-native-root-toast";
 import { LoadingScreen } from "../../../components/LoadingScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { openToastr } from "../../../utils/Toast";
 
 const initialRegion = {
   latitude: 54.526,
@@ -29,14 +30,8 @@ export function UserLocation({ setIsUpdateLocation }) {
 
   const { mutate: doUpdateLocation } = useUpdateLocation({
     onSuccess: () => {
-      Toast.show("Location updated Successfully", {
-        duration: 3000,
-        backgroundColor: "white",
-        textColor: "black",
-        textStyle: {
-          fontSize: 12,
-          color: "black",
-        },
+      openToastr({
+        message: "Location updated Successfully",
       });
 
       refetchProfile();
@@ -44,13 +39,9 @@ export function UserLocation({ setIsUpdateLocation }) {
       setIsUpdateLocation(false);
     },
     onError: (error) => {
-      Toast.show(error?.response?.data?.message ?? "Server error", {
-        duration: 3000,
-        backgroundColor: "#aa2b30",
-        textColor: "white",
-        textStyle: {
-          fontSize: 12,
-        },
+      openToastr({
+        message: error?.response?.data?.message ?? "Server error",
+        isError: true,
       });
     },
   });
@@ -66,13 +57,8 @@ export function UserLocation({ setIsUpdateLocation }) {
     const { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== "granted") {
-      Toast.show("Permission to access location was denied", {
-        duration: 3000,
-        backgroundColor: "#aa2b30",
-        textColor: "white",
-        textStyle: {
-          fontSize: 12,
-        },
+      openToastr({
+        message: "Permission to access location was denied",
       });
 
       setIsMapLoading(false);
