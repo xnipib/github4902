@@ -29,6 +29,7 @@ import {
 import { Divider, Image } from "react-native-elements";
 import { useQueryClient } from "@tanstack/react-query";
 import { UserLocation } from "./components/UserLocation";
+import { openToastr } from "../../utils/Toast";
 
 export function ProfileScreen({ navigation }) {
   const [isEnabled, setIsEnabled] = React.useState(false);
@@ -60,26 +61,14 @@ export function ProfileScreen({ navigation }) {
 
       updateProfile(formData, {
         onSuccess: () => {
-          Toast.show("Photo updated Successfully", {
-            duration: 3000,
-            backgroundColor: "white",
-            textColor: "black",
-            textStyle: {
-              fontSize: 12,
-              color: "black",
-            },
-          });
+          openToastr({ message: "Photo updated Successfully" });
 
           refetchProfile();
         },
         onError: (error) => {
-          Toast.show(error?.response?.data?.message ?? "Server error", {
-            duration: 3000,
-            backgroundColor: "#aa2b30",
-            textColor: "white",
-            textStyle: {
-              fontSize: 12,
-            },
+          openToastr({
+            message: error?.response?.data?.message ?? "Server error",
+            isError: true,
           });
         },
       });
