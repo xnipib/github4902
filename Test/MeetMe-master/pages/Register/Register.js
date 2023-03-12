@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Toast from "react-native-root-toast";
 import { Input } from "../../components";
+import { openToastr } from "../../utils/Toast";
 import { useRegister } from "./data/useRegister";
 
 export function RegisterScreen({ navigation }) {
@@ -21,24 +22,12 @@ export function RegisterScreen({ navigation }) {
   const { isLoading, mutate: doLogin } = useRegister({
     onSuccess: () => {
       navigation.navigate("Login");
-      Toast.show("Registered Successfully", {
-        duration: 3000,
-        backgroundColor: "black",
-        textColor: "white",
-        textStyle: {
-          fontSize: 12,
-          color: "white",
-        },
-      });
+      openToastr({ message: "Registered Successfully" });
     },
     onError: (error) => {
-      Toast.show(error?.response?.data?.message ?? "Server error", {
-        duration: 3000,
-        backgroundColor: "#aa2b30",
-        textColor: "white",
-        textStyle: {
-          fontSize: 12,
-        },
+      openToastr({
+        message: error?.response?.data?.message ?? "Server error",
+        isError: true,
       });
     },
   });
