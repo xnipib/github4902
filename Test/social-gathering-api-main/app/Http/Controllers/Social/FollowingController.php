@@ -20,7 +20,6 @@ class FollowingController extends Controller
 
     public function followings()
     {
-        ray()->queries();
         /* @var User $user */
         $user = auth()->user();
         $lat = $user->location?->getLat();
