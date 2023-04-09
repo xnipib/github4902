@@ -7,12 +7,13 @@ import {
   Pressable,
 } from "react-native";
 import MapView from "react-native-maps";
-import { useProfile, useUpdateLocation } from "../data/useProfile";
 import * as Location from "expo-location";
-import { Text } from "react-native-elements";
-import Toast from "react-native-root-toast";
-import { LoadingScreen } from "../../../components/LoadingScreen";
+import { Icon, Text } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
+import { useProfile, useUpdateLocation } from "../data/useProfile";
+
+import { LoadingScreen } from "../../../components/LoadingScreen";
 import { openToastr } from "../../../utils/Toast";
 
 const initialRegion = {
@@ -127,7 +128,8 @@ export function UserLocation({ setIsUpdateLocation }) {
           <MapView
             style={styles.map}
             initialRegion={mapRegion}
-            onRegionChange={onRegionChange}
+            onRegionChangeComplete={onRegionChange}
+            region={mapRegion}
             showsUserLocation
           >
             <MapView.Marker
@@ -146,6 +148,14 @@ export function UserLocation({ setIsUpdateLocation }) {
         >
           <View>
             <Text className="text-white">Update Location</Text>
+          </View>
+        </Pressable>
+        <Pressable
+          onPress={getCurrentPosition}
+          className="absolute p-2 top-8 left-8 rounded-full bg-black flex justify-center items-center"
+        >
+          <View>
+            <Icon name="circle" color="white" size="10" />
           </View>
         </Pressable>
       </View>
