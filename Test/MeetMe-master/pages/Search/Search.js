@@ -106,7 +106,10 @@ const SearchScreen = () => {
                       {item.email?.slice(0, 40)}
                     </Text>
                     <Text className="text-gray-700 ">
-                      Distance: {!!item.distance ? item.distance + "km" : "NA"}
+                      Distance:{" "}
+                      {!!item.distance || item.distance === 0
+                        ? item.distance + "km"
+                        : "NA"}
                     </Text>
                   </View>
                 </View>
