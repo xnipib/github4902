@@ -28,3 +28,4 @@ class Visit extends Model
     }
 
 }
+
