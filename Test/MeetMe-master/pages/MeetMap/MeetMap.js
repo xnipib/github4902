@@ -59,15 +59,42 @@ export function MeetMapScreen({ navigation, route }) {
         message: "Permission to access location was denied",
       });
 
+      if (
+        user?.location?.coordinates?.[0] &&
+        user?.location?.coordinates?.[1]
+      ) {
+        setMapRegion({
+          latitude: user?.location?.coordinates?.[1],
+          longitude: user?.location?.coordinates?.[0],
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
+      }
+
       exploreLocation();
 
       setIsMapLoading(false);
     } else {
       const location = await Location.getCurrentPositionAsync({});
 
+      const user = route.params.user;
+
+      let centerLatitude = location.coords.latitude;
+      let centerLongitude = location.coords.longitude;
+
+      if (
+        user?.location?.coordinates?.[0] &&
+        user?.location?.coordinates?.[1]
+      ) {
+        centerLatitude =
+          (location.coords.latitude + user?.location?.coordinates?.[1]) / 2;
+        centerLongitude =
+          (location.coords.longitude + user?.location?.coordinates?.[0]) / 2;
+      }
+
       setMapRegion({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
+        latitude: centerLatitude,
+        longitude: centerLongitude,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
@@ -109,6 +136,9 @@ export function MeetMapScreen({ navigation, route }) {
       doMeetUser({
         user: route.params?.user,
         location: selectedMeetPoint?.location,
+        address: selectedMeetPoint?.address,
+        name: selectedMeetPoint?.name,
+        photo_url: selectedMeetPoint?.photo_url,
       });
     }
   };
