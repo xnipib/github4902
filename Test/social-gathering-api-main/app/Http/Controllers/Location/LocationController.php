@@ -39,17 +39,17 @@ class LocationController extends Controller
         $user->save();
         return new UserResource($user);
     }
-    
+
     public function nearby(NearbyRequest $request)
     {
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
         $keyword = $request->input('keyword');
-    
+
         $places = $this->getPlacesNearby($latitude, $longitude, $keyword);
 
 
-        
+
         return  PlaceResource::collection($places->results);
     }
 
@@ -59,30 +59,28 @@ class LocationController extends Controller
         $response = $client->get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', [
             'query' => [
                 'location' => "$latitude,$longitude",
-                'radius' => 500, // in meters
+                'radius' => 5000, // in meters
                 'keyword' => $keyword,
                 'key' => env('GOOGLE_MAPS_API_KEY'),
             ]
         ]);
-   
+
         return json_decode($response->getBody()->getContents());
     }
 
 
     public function markLocationVisited(MarkLocationVisitedRequest $request)
     {
-        $location = Location::updateOrCreate(
+        $location = Location::create(
             [
                 'longitude' => $request->input('longitude'),
                 'latitude' => $request->input('latitude'),
-            ],
-            [
                 'name' => $request->input('name') ?? '',
                 'address' => $request->input('address') ?? '',
                 'photo_url' => $request->input('photo_url') ?? '',
             ]
         );
-        
+
         $visit = auth()->user()->visits()->firstOrCreate([
             'location_id' => $location->id,
             'visited_with' => $request->input('visited_with') ?? null,
@@ -93,7 +91,7 @@ class LocationController extends Controller
 
     public function visitedLocations()
     {
-        $visits = auth()->user()->visits()->with('location', 'visitedWith')->get();
+        $visits = auth()->user()->visits()->with('location', 'visitedWith')->orderByDesc('created_at')->get();
         return VisitResource::collection($visits);
     }
 }
