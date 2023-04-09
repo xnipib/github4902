@@ -24,18 +24,20 @@ export function useNearbyLocations({ latitude, longitude, keyword } = {}) {
     {
       staleTime: Infinity,
       enabled: !!latitude && !!longitude && !!keyword,
-      keepPreviousData: true,
     }
   );
 }
 
 export function useMeetUser(opt) {
   return useMutation(
-    ({ user, location }) => {
+    ({ user, location, address, name, photo_url }) => {
       return http.post(`/mark-visited`, {
         visited_with: user?.id,
         latitude: location?.latitude,
         longitude: location?.longitude,
+        address,
+        name,
+        photo_url,
       });
     },
     {
