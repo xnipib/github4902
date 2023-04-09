@@ -17,6 +17,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { ProfileScreen } from "./pages/Profile/Profile";
 import { MeetMapScreen } from "./pages/MeetMap/MeetMap";
+import { HistoryScreen } from "./pages/History/History";
 
 const Tab = createBottomTabNavigator();
 
@@ -72,6 +73,7 @@ const Router = () => {
     Home: "home",
     Search: "search",
     Profile: "person",
+    History: "sync",
   };
 
   return (
@@ -107,6 +109,7 @@ const Router = () => {
           >
             <Tab.Screen name="Home" component={HomeStackScreen} />
             <Tab.Screen name="Search" component={SearchScreen} />
+            <Tab.Screen name="History" component={HistoryScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
           </Tab.Navigator>
         </>
