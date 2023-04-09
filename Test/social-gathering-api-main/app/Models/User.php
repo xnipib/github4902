@@ -94,4 +94,9 @@ class User extends Authenticatable
             )
         );
     }
+
+    public function visits()
+    {
+        return $this->hasMany(Visit::class);
+    }
 }
