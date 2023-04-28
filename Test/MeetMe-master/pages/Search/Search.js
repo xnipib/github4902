@@ -108,7 +108,7 @@ const SearchScreen = () => {
                     <Text className="text-gray-700 ">
                       Distance:{" "}
                       {!!item.distance || item.distance === 0
-                        ? item.distance + "km"
+                        ? item.distance + " Mi"
                         : "NA"}
                     </Text>
                   </View>
