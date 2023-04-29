@@ -22,7 +22,7 @@ class UserResource extends JsonResource
             'location_visible' => $this->location_visible,
             'location'         => $this->location,
             'followed'         => (bool)$this->followed,
-            'distance'         => $this->distance === null ? null : round($this->distance / 100, 2),
+            'distance'         => $this->distance === null ? null : round($this->distance * 0.621371 / 100, 2),
             'created_at'       => $this->created_at,
             'updated_at'       => $this->updated_at,
         ];
