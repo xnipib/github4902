@@ -59,7 +59,7 @@ class LocationController extends Controller
         $response = $client->get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', [
             'query' => [
                 'location' => "$latitude,$longitude",
-                'radius' => 5000, // in meters
+                'radius' => 1000, // in meters
                 'keyword' => $keyword,
                 'key' => env('GOOGLE_MAPS_API_KEY'),
             ]
